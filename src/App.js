@@ -4,9 +4,11 @@ import {
   Routes,
   Route,
   Link,
+  Outlet,
 } from "react-router-dom";
 import { Customer } from "./pages/customer/Customer";
 import { Home } from "./pages/home/Home";
+import { ProductForm } from "./pages/product/component/ProductForm";
 import { Product } from "./pages/product/Product";
 
 export const App = () => {
@@ -47,9 +49,13 @@ export const App = () => {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Product />} />
-          <Route path="/customers" element={<Customer />} />
-          <Route path="/customers/:name" element={<Customer />} />
+          <Route path="/products" element={<Outlet />}>
+             <Route path="form" element={<ProductForm />}/>
+          <Route path="form" element={<ProductForm />}/>
+            </Route>
+          <Route path="/customers" element={<Customer />}>
+          <Route path=":name" element={<Customer />} />
+            </Route>
         </Routes>
       </div>
     </Router>
