@@ -4,9 +4,10 @@ import {
   Routes,
   Route,
   Link,
-  useNavigate,
-  useParams,
 } from "react-router-dom";
+import { Customer } from "./pages/customer/Customer";
+import { Home } from "./pages/home/Home";
+import { Product } from "./pages/product/Product";
 
 export const App = () => {
   return (
@@ -46,7 +47,7 @@ export const App = () => {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product" element={<Product />} />
+          <Route path="/products" element={<Product />} />
           <Route path="/customers" element={<Customer />} />
           <Route path="/customers/:name" element={<Customer />} />
         </Routes>
@@ -55,21 +56,3 @@ export const App = () => {
   );
 };
 
-const Home = () => {
-  let navigate = useNavigate();
-  return (
-    <>
-      <h2>Home</h2>;
-      <button onClick={() => navigate("/customers/Tika")}>User</button>
-    </>
-  );
-};
-
-const Product = () => {
-  return <h2>About</h2>;
-};
-
-const Customer = () => {
-  let params = useParams();
-  return <h1>My Name {params.name}</h1>;
-};
