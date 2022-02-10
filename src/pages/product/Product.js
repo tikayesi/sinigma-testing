@@ -1,13 +1,18 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Outlet, Route, Routes, useParams } from "react-router-dom";
+import { NotFoundPage } from "../../layout/NonFoundPage";
+import { ProductForm } from "./component/ProductForm";
+import { ProductList } from "./component/ProductList";
 
 export const Product = () => {
-  let params = useParams();
-    return (
-      <>
-      <h2>PRODUCT</h2>
-      <h3>Product id: {params.id}</h3>
-      <Link to="form">Add Product</Link>
-      <Link to="forms">Add Product</Link>
-      </>
-    )
-  };
+  return (
+    <Routes>
+      <Route path="/" element={<Outlet />}>
+        <Route index element={<ProductList />} />
+        <Route path="form" element={<ProductForm />} />
+        <Route path=":id" element={<ProductList />} />
+        <Route path="form" element={<ProductForm />} />
+      </Route>
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  );
+};

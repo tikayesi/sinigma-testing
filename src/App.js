@@ -50,19 +50,18 @@ export const App = () => {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="products" element={<Outlet />}>
-            <Route index element={<Product/>}/>
+          <Route path="products/*" element={<Product />} />
+          {/* <Route index element={<Product/>}/>
              <Route path="form" element={<ProductForm />}/>
              <Route path=":id" element={<Product />}/>
           <Route path="form" element={<ProductForm />}/>
-            </Route>
+            </Route> */}
           <Route path="customers" element={<Customer />}>
-          <Route path=":name" element={<Customer />} />
-            </Route>
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path=":name" element={<Customer />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </Router>
   );
 };
-
