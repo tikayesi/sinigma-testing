@@ -10,6 +10,7 @@ import { NotFoundPage } from "./layout/NonFoundPage";
 import { Customer } from "./pages/customer/Customer";
 import { Home } from "./pages/home/Home";
 import { ProductForm } from "./pages/product/component/ProductForm";
+import ProductList from "./pages/product/component/ProductList";
 import { Product } from "./pages/product/Product";
 
 export const App = () => {
@@ -51,9 +52,9 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="products" element={<Outlet />}>
-            <Route index element={<Product/>}/>
+            <Route index element={<ProductList/>}/>
              <Route path="form" element={<ProductForm />}/>
-             <Route path=":id" element={<Product />}/>
+             <Route path="form/:id" element={<ProductForm />}/>
           <Route path="form" element={<ProductForm />}/>
             </Route>
           <Route path="customers" element={<Customer />}>
