@@ -6,6 +6,7 @@ import {
   Link,
   Outlet,
 } from "react-router-dom";
+import { NotFoundPage } from "./layout/NonFoundPage";
 import { Customer } from "./pages/customer/Customer";
 import { Home } from "./pages/home/Home";
 import { ProductForm } from "./pages/product/component/ProductForm";
@@ -49,13 +50,16 @@ export const App = () => {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Outlet />}>
+          <Route path="products" element={<Outlet />}>
+            <Route index element={<Product/>}/>
              <Route path="form" element={<ProductForm />}/>
+             <Route path=":id" element={<Product />}/>
           <Route path="form" element={<ProductForm />}/>
             </Route>
-          <Route path="/customers" element={<Customer />}>
+          <Route path="customers" element={<Customer />}>
           <Route path=":name" element={<Customer />} />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </Router>

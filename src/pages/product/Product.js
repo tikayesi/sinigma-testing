@@ -1,11 +1,13 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const Product = () => {
-
+  let params = useParams();
     return (
       <>
       <h2>PRODUCT</h2>
-      <Link to="/products/form">Add Product</Link>
+      <h3>Product id: {params.id}</h3>
+      <Link to="form">Add Product</Link>
+      <Link to="forms">Add Product</Link>
       </>
     )
   };

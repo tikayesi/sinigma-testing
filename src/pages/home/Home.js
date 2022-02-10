@@ -5,7 +5,8 @@ export const Home = () => {
     return (
       <>
         <h2>Home</h2>;
-        <button onClick={() => navigate("/customers/Tika")}>User</button>
+        <button onClick={() => navigate("customers/Tika")}>User</button>
+        <button onClick={() => navigate("products/P001")}>Product</button>
       </>
     );
   };
