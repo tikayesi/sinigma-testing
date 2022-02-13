@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { deleteProduct, getProducts } from "../services/ProductService";
 
 const ProductList = () => {
   const [list, setList] = useState([]);
@@ -13,7 +14,7 @@ const ProductList = () => {
 
   const getProduct = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/products");
+      const response = await getProducts();
       setList(response.data.data);
       console.log(list);
     } catch (error) {
@@ -24,7 +25,7 @@ const ProductList = () => {
   const handleDelete = async(e) => {
     console.log(e);
     if ( window.confirm(`Are you sure to do this ${e.name}?`)){
-    await axios.delete(`http://localhost:3000/products/${e.id}`)
+    await deleteProduct(e.id)
        getProduct()
     }else{
         getProduct()
@@ -56,7 +57,7 @@ const ProductList = () => {
     <>
       <div>
         <h2>Product List</h2>
-        <button type="button" className="btn btn-success">
+        <button type="button" className="btn btn-success" onClick={() => navigate('form')}>
           Add Product
         </button>
         <table className="table table-striped">

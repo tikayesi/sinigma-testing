@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, {useEffect, useRef, useState} from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { createProduct, getProduct, updateproduct } from "../services/ProductService";
 
 export const ProductForm = () =>{
     let params = useParams();
@@ -10,7 +11,7 @@ export const ProductForm = () =>{
 
     useEffect(() => {
       if(params.id){
-        axios.get(`http://localhost:3000/products/${params.id}`)
+        getProduct(params.id)
         .then(res => {
           setNewId(res.data.id);
           setNewName(res.data.name)
@@ -30,7 +31,7 @@ export const ProductForm = () =>{
 
     const handleSubmit = async (event) => {
         try{
-           let res = await axios.post(`http://localhost:3000/products`, { id : newId, name : newName })
+           let res = await createProduct({ id : newId, name : newName });
             console.log(res);
             console.log(res.data);
           navigate("/products");
@@ -42,7 +43,7 @@ export const ProductForm = () =>{
 
     const handleUpdate = async (event) => {
         try{
-            let res = await axios.put(`http://localhost:3000/products`, { id : newId, name : newName })
+            let res = await updateproduct( { id : newId, name : newName })
              console.log(res);
              console.log(res.data);
            navigate("/products");
