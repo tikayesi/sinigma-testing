@@ -1,14 +1,18 @@
 import { useFormik } from "formik";
-import React, {useEffect, useState} from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { createProduct, getProduct, updateproduct } from "../services/ProductService";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
-export const ProductForm = () =>{
-    let params = useParams();
-    const [newId, setNewId] = useState('');
-    const [newName, setNewName] = useState('');
-    const readable = params.id ? true : false;
+export const ProductForm = ({bloc}) =>{
+ const {
+          params,
+          newId,
+          newName,
+          readable,
+          getProductById,
+          handleSubmit,
+          handleUpdate
+  } = bloc();
 
     const formik = useFormik({
       initialValues:{
@@ -20,49 +24,24 @@ export const ProductForm = () =>{
     }),
       onSubmit: () => {
         if(params.id){
-          handleUpdate()
+          handleUpdate(formik.values)
         }else{
-         handleSubmit()
+         handleSubmit(formik.values)
         }
       }
     })
 
     useEffect(() => {
       if(params.id){
-        getProductById()
+        getProduct()
     }
     }, []);
 
-    const getProductById = async() =>{
-      const res = await getProduct(params.id)
+    const getProduct = async() =>{
+      const res = await getProductById()
       formik.values.id = res.data.id;
-          formik.values.name = res.data.name;
-          setNewId(formik.values.id);
-          setNewName(formik.values.name)
-    }
-
-    const navigate = useNavigate();
-
-    const handleSubmit = async () => {
-        try{
-           let res = await createProduct(formik.values);
-            console.log(res);
-            console.log(res.data);
-          navigate("/products");
-        } catch (error) {
-          console.error(error);
-        }
-    }
-
-    const handleUpdate = async () => {
-        try{
-            let res = await updateproduct( formik.values)
-             console.log(res);
-             console.log(res.data);
-           navigate("/products");
-         } catch (error) {
-           console.error(error);
-         }
+      formik.values.name = res.data.name;
+      formik.setFieldValue(res);
     }
 
         return(
