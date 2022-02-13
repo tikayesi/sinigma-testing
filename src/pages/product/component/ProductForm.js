@@ -6,8 +6,6 @@ import * as Yup from "yup";
 export const ProductForm = ({bloc}) =>{
  const {
           params,
-          newId,
-          newName,
           readable,
           getProductById,
           handleSubmit,
@@ -16,8 +14,8 @@ export const ProductForm = ({bloc}) =>{
 
     const formik = useFormik({
       initialValues:{
-        id: newId,
-        name: newName
+        id: "",
+        name: ""
       },
       validationSchema : Yup.object({
         name: Yup.string().required("Required!").min(5, "minimum 5 character"),
