@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { deleteProduct, getProducts } from "../services/ProductService";
 
-const ProductListBloc = () => {
+const ProductListBloc = (productRepository) => {
     const [list, setList] = useState([]);
+
+    let {
+      getProducts,
+      getProduct,
+      createProduct,
+      updateproduct,
+      deleteProduct
+    } = productRepository()
   
     const getListProduct = async () => {
         try {

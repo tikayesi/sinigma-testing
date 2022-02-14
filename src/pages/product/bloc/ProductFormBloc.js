@@ -1,10 +1,16 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { createProduct, getProduct, updateproduct } from "../services/ProductService";
 
-const ProductFormBloc = () => {
+const ProductFormBloc = (productRepository) => {
     let params = useParams();
     const readable = params.id ? true : false;
     const navigate = useNavigate();
+    let {
+      getProducts,
+      getProduct,
+      createProduct,
+      updateproduct,
+      deleteProduct
+    } = productRepository()
 
     const getProductById = async() =>{
         const res = await getProduct(params.id)
