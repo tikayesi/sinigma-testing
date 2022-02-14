@@ -67,7 +67,7 @@ export const ProductForm = ({bloc}) =>{
                 </div>
             </div>
             <br></br>
-            <Link to={"/products"}><button className="btn btn-warning">Cancel</button></Link> {' '}
+            <Link to={"/protected/products"}><button className="btn btn-warning">Cancel</button></Link> {' '}
             <input className="btn btn-primary" type="submit" value="Submit"/> 
             </form>
             </div>

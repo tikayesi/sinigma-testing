@@ -1,0 +1,63 @@
+.login.main {
+    background-image: url("https://picsum.photos/536/354");
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+.login.container {
+    height: 100vh;
+    width: 100vw;
+}
+
+.login.containerCenter {
+    height: 100vh;
+}
+
+.login.containerEnd {
+    width: 100vw;
+    padding: 75px;
+}
+
+.login.backgroundColorCard {
+    background: white;
+}
+
+.login.labelInput {
+    color: whitesmoke;
+}
+
+.login.inputText {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid whitesmoke;
+    background: none !important;
+    border-radius: 0 !important;
+    color: whitesmoke;
+}
+
+.login.inputText:focus {
+    border-color: whitesmoke !important;
+    border-bottom: 1px solid whitesmoke !important;
+    box-shadow: 0 7px 4px -6px white;
+}
+
+.login.inputButton {
+    background: none !important;
+    border: 1px solid whitesmoke;
+}
+
+.login.hideAlert{
+    display: none;
+}
+
+.login.hideInput{
+    display: none;
+}
+
+.card{
+    border-radius: 10px;
+    border: 1px solid #cccccc;
+  
+  }

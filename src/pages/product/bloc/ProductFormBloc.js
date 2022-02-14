@@ -16,7 +16,7 @@ const ProductFormBloc = () => {
              let res = await createProduct(values);
               console.log(res);
               console.log(res.data);
-            navigate("/products");
+            navigate("/protected/products");
           } catch (error) {
             console.error(error);
           }
@@ -27,7 +27,7 @@ const ProductFormBloc = () => {
               let res = await updateproduct(values)
                console.log(res);
                console.log(res.data);
-             navigate("/products");
+             navigate("/protected/products");
            } catch (error) {
              console.error(error);
            }
