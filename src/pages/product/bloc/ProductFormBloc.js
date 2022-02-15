@@ -5,11 +5,9 @@ const ProductFormBloc = (productRepository) => {
     const readable = params.id ? true : false;
     const navigate = useNavigate();
     let {
-      getProducts,
       getProduct,
       createProduct,
       updateproduct,
-      deleteProduct
     } = productRepository()
 
     const getProductById = async() =>{

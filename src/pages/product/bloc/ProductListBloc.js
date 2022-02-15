@@ -5,9 +5,6 @@ const ProductListBloc = (productRepository) => {
 
     let {
       getProducts,
-      getProduct,
-      createProduct,
-      updateproduct,
       deleteProduct
     } = productRepository()
   
