@@ -1,4 +1,6 @@
 import { Col, Row } from "reactstrap";
+import LoginBloc from "../pages/auth/bloc/LoginBloc";
+import LoginService from "../pages/auth/service/LoginService";
 import AppRouters from "../routes/AppRouters";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
@@ -8,7 +10,7 @@ const ColumnLayout = () => {
         <>
          <Row>
           <Col sm="12" className="p-0">
-            <Header />
+            <Header bloc={()=>LoginBloc(LoginService)}/>
           </Col>
         </Row>
          <Row>

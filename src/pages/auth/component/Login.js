@@ -1,37 +1,8 @@
-import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './login.css';
-export const Login = () => {
-    const navigate = useNavigate();
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const loginSubmit = (event) => {
-        event.preventDefault();
-        let body = {
-            username : username,
-            password : password
-        };
-        axios.post('http://localhost:3000/auth', body,  { responseType: 'json' })
-        .then(res=>{
-            console.log("res ", res.data);
-            const dataToken = res.data.token;
-            sessionStorage.setItem('token', dataToken);
-            console.log("sesion token",sessionStorage.getItem('token'));
-            console.log("token: " + dataToken);
-            navigate("/protected",{ replace: true });
-        }).catch(res=>{
-            alert("Username atau password salah!")
-        })
-    }
-
-    const handleusername = event =>{
-        setUsername(event.target.value)
-      }
-
-      const handlePassword = event =>{
-        setPassword(event.target.value)
-      }
+export const Login = ({bloc}) => {
+    const {  handleusername,
+        handlePassword,
+        loginSubmit} = bloc()
     return(
             <div className='login main'>
                  <form onSubmit={loginSubmit}>

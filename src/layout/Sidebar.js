@@ -6,7 +6,7 @@ const Sidebar = () => {
         <>
           <Nav vertical pills>
           <NavItem>
-            <NavLink to="/" className="nav-link">Home</NavLink>
+            <NavLink to="" className="nav-link">Home</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to="customers" className="nav-link">Customers</NavLink>
