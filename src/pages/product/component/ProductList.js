@@ -1,10 +1,8 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ProductList = ({bloc}) => {
-  const {list, getListProduct, handleDelete} = bloc();
-  
-  const navigate = useNavigate();
+  const {list, getListProduct, handleDelete, handleUpdate,
+    handleAdd} = bloc();
 
   useEffect(() => {
     getListProduct();
@@ -15,7 +13,7 @@ const ProductList = ({bloc}) => {
     <>
       <div>
         <h2>Product List</h2>
-        <button type="button" className="btn btn-success" onClick={() => navigate('form')}>
+        <button type="button" className="btn btn-success" onClick={() => handleAdd()}>
           Add Product
         </button>
         <table className="table table-striped">
@@ -36,7 +34,7 @@ const ProductList = ({bloc}) => {
                   <td>{product.name}</td>
                   <td>
                     <button type="button" className="btn btn-warning btn-sm" 
-                    onClick={() => navigate(`form/${product.id}`)}>
+                    onClick={() => handleUpdate(product.id)}>
                       Update
                     </button>
                     <button value={product} onClick={() => handleDelete(product)} type="button" className="btn btn-danger btn-sm">

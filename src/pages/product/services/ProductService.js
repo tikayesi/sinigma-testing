@@ -1,8 +1,8 @@
 import client from "../../../shared/http-client/Client";
 
 const ProductService = () => {
- async function getProducts(params){
-    const response =  await client.get('/products', {params})
+ async function getProducts(data){
+    const response =  await client.get('/products', {params:data})
     return response;
   }
   
