@@ -125,13 +125,15 @@ describe("Product List Bloc", () => {
       navigationMock
     );
     // const res = await bloc.handleDelete("002");
-    // expect.assertions(2)
-        try{
-            await bloc.handleDelete("002");
-        }catch(e){
-            console.log("TESSS",e);
-            expect(e).toEqual("e")
-        }
+    // expect.assertions(1)
+        // try{
+        //     await bloc.handleDelete("002");
+        // }catch(e){
+        //     console.log("TESSS",e);
+        //     expect(e).toEqual("Error")
+        // }
         // await bloc.handleDelete("002").catch(e => expect(e).toEqual(""))
+        await bloc.handleDelete("002");
+        expect(setProductListMock).toHaveBeenCalledWith({})
   });
 });

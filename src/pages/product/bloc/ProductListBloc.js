@@ -17,7 +17,7 @@ const ProductListBloc = (useProductList, productRepository, navigation) => {
       setList(response.data.data);
       console.log(list);
     } catch (error) {
-      // console.error(error);
+      console.error(error);
     }
   };
 
@@ -26,7 +26,8 @@ const ProductListBloc = (useProductList, productRepository, navigation) => {
       await deleteProduct(e.id);
       getListProduct();
     } catch (error) {
-      // console.error(error);
+      setList({})
+      // console.log(error);
     }
   };
 
