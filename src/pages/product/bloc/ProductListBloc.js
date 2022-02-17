@@ -17,7 +17,8 @@ const ProductListBloc = (useProductList, productRepository, navigation) => {
       setList(response.data.data);
       console.log(list);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      setList({})
     }
   };
 

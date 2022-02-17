@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 export const ProductForm = ({bloc}) =>{
@@ -9,7 +8,8 @@ export const ProductForm = ({bloc}) =>{
           readable,
           getProductById,
           handleSubmit,
-          handleUpdate
+          handleUpdate,
+          handleCancel
   } = bloc();
 
     const formik = useFormik({
@@ -67,7 +67,7 @@ export const ProductForm = ({bloc}) =>{
                 </div>
             </div>
             <br></br>
-            <Link to={"/products"}><button className="btn btn-warning">Cancel</button></Link> {' '}
+            <button onClick={() => handleCancel()} className="btn btn-warning">Cancel</button>
             <input className="btn btn-primary" type="submit" value="Submit"/> 
             </form>
             </div>

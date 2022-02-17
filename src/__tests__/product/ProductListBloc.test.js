@@ -136,4 +136,41 @@ describe("Product List Bloc", () => {
         await bloc.handleDelete("002");
         expect(setProductListMock).toHaveBeenCalledWith({})
   });
+
+  it("Should call navigate To when update form", () => {
+    productListRepositoryMock.mockReturnValue({
+      getProducts: jest.fn(),
+    });
+
+    let setProductListMock = jest.fn();
+    useProductListMock.mockReturnValue({
+      list: [],
+      setList: setProductListMock,
+    });
+
+    navigationMock.mockReturnValue({
+      navigateTo: jest.fn(),
+    });
+    let bloc = ProductListBloc(useProductListMock, productListRepositoryMock, navigationMock)
+    bloc.handleUpdate()
+    expect(navigationMock).toHaveBeenCalledTimes(1)
+})
+it("Should call navigate To when add form", () => {
+  productListRepositoryMock.mockReturnValue({
+    getProducts: jest.fn(),
+  });
+
+  let setProductListMock = jest.fn();
+  useProductListMock.mockReturnValue({
+    list: [],
+    setList: setProductListMock,
+  });
+
+  navigationMock.mockReturnValue({
+    navigateTo: jest.fn(),
+  });
+  let bloc = ProductListBloc(useProductListMock, productListRepositoryMock, navigationMock)
+  bloc.handleAdd()
+  expect(navigationMock).toHaveBeenCalledTimes(1)
+})
 });

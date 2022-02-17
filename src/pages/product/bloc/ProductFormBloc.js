@@ -1,9 +1,7 @@
-import { useNavigate, useParams } from "react-router-dom";
-
-const ProductFormBloc = (productRepository) => {
-    let params = useParams();
+const ProductFormBloc = (productRepository, navigation) => {
+  const {paramsNav, navigateTo} = navigation();
+  const params = paramsNav()
     const readable = params.id ? true : false;
-    const navigate = useNavigate();
     let {
       getProduct,
       createProduct,
@@ -17,24 +15,24 @@ const ProductFormBloc = (productRepository) => {
   
       const handleSubmit = async (values) => {
           try{
-             let res = await createProduct(values);
-              console.log(res);
-              console.log(res.data);
-            navigate("/products");
+            await createProduct(values);
+            navigateTo("..");
           } catch (error) {
-            console.error(error);
+            throw(error);
           }
       }
   
       const handleUpdate = async (values) => {
           try{
-              let res = await updateproduct(values)
-               console.log(res);
-               console.log(res.data);
-             navigate("/products");
+             await updateproduct(values)
+             navigateTo("..");
            } catch (error) {
-             console.error(error);
+             throw(error);
            }
+      }
+
+      const handleCancel = async () => {
+        navigateTo("..")
       }
 
       return {
@@ -42,7 +40,8 @@ const ProductFormBloc = (productRepository) => {
           readable,
           getProductById,
           handleSubmit,
-          handleUpdate
+          handleUpdate,
+          handleCancel
       }
 
 }

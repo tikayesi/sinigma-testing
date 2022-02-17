@@ -15,9 +15,20 @@ describe('App', () => {
         expect(screen.getByText(/Login Page/i)).toBeInTheDocument()
     })
 
+    it('Should navigate to notfound screen successfully', () => {
+        render(
+            <MemoryRouter initialEntries={['/testt']}>
+                <MainRouters/>
+            </MemoryRouter>
+        );
+
+        expect(screen.getByText(/PAGE NOT FOUND/i)).toBeInTheDocument()
+    })
+
+    
     // https://testing-library.com/docs/example-react-router/
     it('full app rendering', () => {
-       render(<App/>, {wrapper: MemoryRouter})
+       render(<App/>)
        expect(screen.getByText(/Login Page/i)).toBeInTheDocument()
     })
 })

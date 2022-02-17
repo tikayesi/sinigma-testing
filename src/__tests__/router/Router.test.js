@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react"
 import { MemoryRouter } from "react-router-dom";
 import AppRouters from "../../routes/AppRouters";
+import { RouteNavigation } from "../../routes/RouteNavigation";
 
 describe('Router', () => {
     afterEach(cleanup);
@@ -52,4 +53,14 @@ describe('Router', () => {
 
         expect(screen.getByText(/PAGE NOT FOUND/i)).toBeInTheDocument()
     })
+
+    // it('Should call navigate when navigate To', () => {
+    //     const navMock = jest.fn()
+    //     let routeNav = RouteNavigation()
+    //     let navigateMock = routeNav.navigateTo()
+    //     navigateMock.mockReturnValue({
+    //         navigate: navMock
+    //     }) 
+    //     expect(navMock).toBeCalledTimes(1)
+    // })
 })
