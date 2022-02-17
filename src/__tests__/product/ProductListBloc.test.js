@@ -16,6 +16,7 @@ describe("Product List Bloc", () => {
       { id: "001", name: "Saus" },
       { id: "002", name: "Susu" },
     ];
+    let resp = {"isLoading": false, list: products}
     let getProductListReturnMock = jest
       .fn()
       .mockResolvedValue({ data: { data: products } });
@@ -25,8 +26,8 @@ describe("Product List Bloc", () => {
 
     let setProductListMock = jest.fn();
     useProductListMock.mockReturnValue({
-      list: products,
-      setList: setProductListMock,
+      screenState: resp,
+      setScreenState: setProductListMock,
     });
 
     navigationMock.mockReturnValue({
@@ -39,12 +40,13 @@ describe("Product List Bloc", () => {
       navigationMock
     );
     await bloc.getListProduct();
-    expect(setProductListMock).toHaveBeenCalledWith(products);
+    expect(setProductListMock).toBeCalledTimes(2);
+    expect(setProductListMock).toHaveBeenCalledWith(resp);
     // jika ada pertanyaan
     // memastikan bahwa list yang di set sama dengan list yang dikirim
     // sebenarnya sudah dilakukan test di useProductListTest
     // Jadi tidak relate dengan test getListProduct
-    expect(useProductListMock().list.length).toEqual(2)
+    expect(useProductListMock().screenState.list.length).toEqual(2)
   });
 
   test("handle delete", async () => {
@@ -57,7 +59,7 @@ describe("Product List Bloc", () => {
     let setProductListMock = jest.fn();
     useProductListMock.mockReturnValue({
       list: products,
-      setList: setProductListMock,
+      setScreenState: setProductListMock,
     });
     navigationMock.mockReturnValue({
       navigationTo: jest.fn(),
@@ -88,7 +90,7 @@ describe("Product List Bloc", () => {
     let setProductListMock = jest.fn();
     useProductListMock.mockReturnValue({
       list: products,
-      setList: setProductListMock,
+      setScreenState: setProductListMock,
     });
     navigationMock.mockReturnValue({
       navigationTo: jest.fn(),
@@ -105,6 +107,7 @@ describe("Product List Bloc", () => {
   });
   test("handle delete error when delete product rejected", async () => {
     let products = [{ id: "001", name: "Saus" }];
+    let resp = {error: 'Error', isLoading : false, list : []}
     let deleteProductMock = jest.fn();
     deleteProductMock.mockRejectedValue("Error")
     productListRepositoryMock.mockReturnValue({
@@ -113,8 +116,8 @@ describe("Product List Bloc", () => {
     });
     let setProductListMock = jest.fn();
     useProductListMock.mockReturnValue({
-      list: products,
-      setList: setProductListMock,
+      screenState: resp,
+      setScreenState: setProductListMock,
     });
     navigationMock.mockReturnValue({
       navigationTo: jest.fn(),
@@ -134,7 +137,7 @@ describe("Product List Bloc", () => {
         // }
         // await bloc.handleDelete("002").catch(e => expect(e).toEqual(""))
         await bloc.handleDelete("002");
-        expect(setProductListMock).toHaveBeenCalledWith({})
+        expect(setProductListMock).toHaveBeenCalledWith(resp)
   });
 
   it("Should call navigate To when update form", () => {
@@ -145,7 +148,7 @@ describe("Product List Bloc", () => {
     let setProductListMock = jest.fn();
     useProductListMock.mockReturnValue({
       list: [],
-      setList: setProductListMock,
+      setScreenState: setProductListMock,
     });
 
     navigationMock.mockReturnValue({
@@ -163,7 +166,7 @@ it("Should call navigate To when add form", () => {
   let setProductListMock = jest.fn();
   useProductListMock.mockReturnValue({
     list: [],
-    setList: setProductListMock,
+    setScreenState: setProductListMock,
   });
 
   navigationMock.mockReturnValue({

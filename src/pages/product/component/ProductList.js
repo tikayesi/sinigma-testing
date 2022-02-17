@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const ProductList = ({bloc}) => {
-  const {list, getListProduct, handleDelete, handleUpdate,
+  const {screenState, getListProduct, handleDelete, handleUpdate,
     handleAdd} = bloc();
 
   useEffect(() => {
@@ -11,8 +11,11 @@ const ProductList = ({bloc}) => {
 
   return (
     <>
+            
       <div>
-        <h2>Product List</h2>
+      <h2>Product List</h2>
+      {screenState.isLoading ? <h2>LOADING...</h2>:
+        <div>
         <button type="button" className="btn btn-success" onClick={() => handleAdd()}>
           Add Product
         </button>
@@ -26,7 +29,7 @@ const ProductList = ({bloc}) => {
             </tr>
           </thead>
           <tbody>
-            {list.map((product, index) => {
+            {screenState.list.map((product, index) => {
               return (
                 <tr key={product.id}>
                   <td>{index + 1}</td>
@@ -46,6 +49,8 @@ const ProductList = ({bloc}) => {
             })}
           </tbody>
         </table>
+      </div>
+}
       </div>
     </>
   );

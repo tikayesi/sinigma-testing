@@ -2,7 +2,7 @@
 
 const ProductListBloc = (useProductList, productRepository, navigation) => {
   // const navigate = useNavigate();
-  let { list, setList } = useProductList();
+  let { screenState, setScreenState } = useProductList();
   let { getProducts, deleteProduct } = productRepository();
   // Setelah dicoba menggunakan navigation error, maka kita bisa copot navigasinya
   const {navigateTo} = navigation()
@@ -13,21 +13,22 @@ const ProductListBloc = (useProductList, productRepository, navigation) => {
     try {
       // contoh mengirimkan query param
       // const response = await getProducts({id : "001"});
+      setScreenState({isLoading : true});
       const response = await getProducts();
-      setList(response.data.data);
-      console.log(list);
+      setScreenState({list : response.data.data,  isLoading : false});
     } catch (error) {
       // console.error(error);
-      setList({})
+      setScreenState({list : [], error: "Error", isLoading : false})
     }
   };
 
   const handleDelete = async (e) => {
     try {
+      setScreenState({isLoading : true})
       await deleteProduct(e.id);
       getListProduct();
     } catch (error) {
-      setList({})
+      setScreenState({list : [], error: "Error", isLoading : false})
       // console.log(error);
     }
   };
@@ -41,7 +42,7 @@ const ProductListBloc = (useProductList, productRepository, navigation) => {
   }
 
   return {
-    list,
+    screenState,
     getListProduct,
     handleDelete,
     handleUpdate,

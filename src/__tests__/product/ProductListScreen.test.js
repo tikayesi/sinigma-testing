@@ -10,7 +10,7 @@ describe("Product List Screen", ()=>{
         bloc.mockReturnValue({
             // Nanti beri contoh listnya array kosong []
             // maka handle delete dan update tidak ditemukan
-            list : [],
+            screenState : {list:[], isLoading: false, error:''},
             getListProduct : getListProductMock,
             handleDelete : jest.fn(),
             handleUpdate : jest.fn(),
@@ -31,7 +31,7 @@ describe("Product List Screen", ()=>{
         const deleteProductMock = jest.fn()
         const updateProductMock = jest.fn()
         bloc.mockReturnValue({
-            list : [{id: "001", name: "shampoo"}],
+            screenState : {list:[{ id: "001", name: "Saus" }], isLoading: false, error:''},
             getListProduct : getListProductMock,
             handleDelete : deleteProductMock,
             handleUpdate : updateProductMock,

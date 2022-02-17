@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 const UseProductList = () => {
-    const [list, setList] = useState([]);
+    const [screenState, setScreenState] = useState({list: [], isLoading : false, error: ''});
 
     return {
-        list, setList
+        screenState, setScreenState
     }
 }
 
