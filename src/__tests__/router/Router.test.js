@@ -3,6 +3,14 @@ import { MemoryRouter } from "react-router-dom";
 import AppRouters from "../../routes/AppRouters";
 import { RouteNavigation } from "../../routes/RouteNavigation";
 
+const mockedUsedNavigate = jest.fn();
+const mockedUseParam = jest.fn()
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+useNavigate: () => mockedUsedNavigate,
+useParams : () => mockedUseParam
+}));
+
 describe('Router', () => {
     afterEach(cleanup);
 
@@ -54,13 +62,17 @@ describe('Router', () => {
         expect(screen.getByText(/PAGE NOT FOUND/i)).toBeInTheDocument()
     })
 
-    // it('Should call navigate when navigate To', () => {
-    //     const navMock = jest.fn()
-    //     let routeNav = RouteNavigation()
-    //     let navigateMock = routeNav.navigateTo()
-    //     navigateMock.mockReturnValue({
-    //         navigate: navMock
-    //     }) 
-    //     expect(navMock).toBeCalledTimes(1)
-    // })
+
+    it('Should call navigate when navigate To', () => {
+        RouteNavigation().navigateTo('enigma');
+        expect(mockedUsedNavigate).toHaveBeenCalledWith('enigma')
+
+        // const navMock = jest.fn()
+        // let routeNav = RouteNavigation()
+        // let navigateMock = routeNav.navigateTo()
+        // navigateMock.mockReturnValue({
+        //     navigate: navMock
+        // }) 
+        // expect(navMock).toBeCalledTimes(1)
+    })
 })
